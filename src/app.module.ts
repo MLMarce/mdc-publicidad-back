@@ -9,6 +9,7 @@ import { WorkFieldModule } from './work-field/work-field.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import databaseConfig from './config/database.config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     CategoryModule,
     FieldModule,
     WorkFieldModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
