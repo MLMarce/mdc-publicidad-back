@@ -1,11 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { CreateFieldDto } from './dto/create-field.dto';
-import { UpdateFieldDto } from './dto/update-field.dto';
+import { FieldRepository } from './field.repository';
 
 @Injectable()
 export class FieldService {
-  create(createFieldDto: CreateFieldDto) {
-    return 'This action adds a new field';
+  constructor(private readonly fieldRespository: FieldRepository) {}
+  async createField(createFieldDto: CreateFieldDto) {
+    return await this.fieldRespository.addField(createFieldDto);
   }
 
   findAll() {
@@ -16,7 +17,7 @@ export class FieldService {
     return `This action returns a #${id} field`;
   }
 
-  update(id: number, updateFieldDto: UpdateFieldDto) {
+  update(id: number) {
     return `This action updates a #${id} field`;
   }
 

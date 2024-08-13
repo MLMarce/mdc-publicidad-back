@@ -1,15 +1,22 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { FieldService } from './field.service';
 import { CreateFieldDto } from './dto/create-field.dto';
-import { UpdateFieldDto } from './dto/update-field.dto';
 
 @Controller('field')
 export class FieldController {
   constructor(private readonly fieldService: FieldService) {}
 
   @Post()
-  create(@Body() createFieldDto: CreateFieldDto) {
-    return this.fieldService.create(createFieldDto);
+  async createField(@Body() createFieldDto: CreateFieldDto) {
+    return await this.fieldService.createField(createFieldDto);
   }
 
   @Get()
@@ -23,8 +30,8 @@ export class FieldController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateFieldDto: UpdateFieldDto) {
-    return this.fieldService.update(+id, updateFieldDto);
+  update(@Param('id') id: string) {
+    return this.fieldService.update(+id);
   }
 
   @Delete(':id')
