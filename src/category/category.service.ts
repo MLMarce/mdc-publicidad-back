@@ -14,15 +14,15 @@ export class CategoryService {
     return `This action returns all category`;
   }
 
-  findOne(id: number) {
+  findOne(id: string) {
     return `This action returns a #${id} category`;
   }
 
-  update(id: number, updateCategoryDto: UpdateCategoryDto) {
-    return `This action updates a #${id} category`;
+  async update(id: string, updateCategoryDto: UpdateCategoryDto) {
+    return await this.categoryRepository.updateCategory(id, updateCategoryDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} category`;
+  async remove(id: string) {
+    return await this.categoryRepository.removeCategory(id);
   }
 }

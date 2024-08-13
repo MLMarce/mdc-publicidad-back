@@ -1,4 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Field } from './entities/field.entity';
 import { Repository } from 'typeorm';
@@ -18,7 +22,7 @@ export class FieldRepository {
       where: { id: field.categoryId },
     });
     if (!category) {
-      throw new Error('Category not found');
+      throw new NotFoundException('Category not found');
     }
     const newField = new Field();
     newField.name = field.name;
@@ -26,7 +30,7 @@ export class FieldRepository {
 
     const createdField = await this.fieldRepository.save(newField);
     if (!createdField) {
-      throw new Error('Failed to create field');
+      throw new BadRequestException('Failed to create field');
     }
 
     return createdField;
