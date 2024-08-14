@@ -1,26 +1,28 @@
 import { Injectable } from '@nestjs/common';
 import { CreateWorkDto } from './dto/create-work.dto';
 import { UpdateWorkDto } from './dto/update-work.dto';
+import { WorkRepository } from './work.repository';
 
 @Injectable()
 export class WorkService {
-  create(createWorkDto: CreateWorkDto) {
-    return 'This action adds a new work';
+  constructor(private readonly workRepository: WorkRepository) {}
+  async create(createWorkDto: CreateWorkDto) {
+    return await this.workRepository.createWork(createWorkDto);
   }
 
-  findAll() {
-    return `This action returns all work`;
+  async findAll() {
+    return await this.workRepository.getAllWorks();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} work`;
+  async findOne(id: string) {
+    return await this.workRepository.getWorkById(id);
   }
 
-  update(id: number, updateWorkDto: UpdateWorkDto) {
-    return `This action updates a #${id} work`;
+  async update(id: string, updateWorkDto: UpdateWorkDto) {
+    return await this.workRepository.updateWork(id, updateWorkDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} work`;
+  async remove(id: string) {
+    return await this.workRepository.deleteWork(id);
   }
 }

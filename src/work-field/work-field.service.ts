@@ -1,26 +1,28 @@
 import { Injectable } from '@nestjs/common';
 import { CreateWorkFieldDto } from './dto/create-work-field.dto';
 import { UpdateWorkFieldDto } from './dto/update-work-field.dto';
+import { WorkFieldRepository } from './work-field.repository';
 
 @Injectable()
 export class WorkFieldService {
-  create(createWorkFieldDto: CreateWorkFieldDto) {
-    return 'This action adds a new workField';
+  constructor(private readonly workFieldRepository: WorkFieldRepository) {}
+  async create(createWorkFieldDto: CreateWorkFieldDto) {
+    return await this.workFieldRepository.create(createWorkFieldDto);
   }
 
-  findAll() {
-    return `This action returns all workField`;
+  async findAll() {
+    return await this.workFieldRepository.findAll();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} workField`;
+  async findOne(id: string) {
+    return await this.workFieldRepository.findOne(id);
   }
 
-  update(id: number, updateWorkFieldDto: UpdateWorkFieldDto) {
-    return `This action updates a #${id} workField`;
+  async update(id: string, updateWorkFieldDto: UpdateWorkFieldDto) {
+    return await this.update(id, updateWorkFieldDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} workField`;
+  async remove(id: string) {
+    return await this.workFieldRepository.remove(id);
   }
 }
