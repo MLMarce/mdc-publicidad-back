@@ -28,6 +28,14 @@ export class Work {
   })
   name: string;
 
+  @Column({ type: 'varchar' })
+  @ApiProperty({
+    description: 'Description work',
+    example: 'description work example',
+    type: 'string',
+  })
+  description: string;
+
   @ManyToOne(() => Category, (category) => category.jobs)
   category: Category;
 

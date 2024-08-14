@@ -1,4 +1,15 @@
-import { PartialType } from '@nestjs/swagger';
-import { CreateWorkDto } from './create-work.dto';
+import { IsOptional, IsString } from 'class-validator';
 
-export class UpdateWorkDto extends PartialType(CreateWorkDto) {}
+export class UpdateWorkDto {
+  @IsString()
+  @IsOptional()
+  name: string;
+
+  @IsString()
+  @IsOptional()
+  description: string;
+
+  @IsString()
+  @IsOptional()
+  category: string;
+}
