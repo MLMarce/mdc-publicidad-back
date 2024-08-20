@@ -21,6 +21,11 @@ export class WorkField {
   @ManyToOne(() => Field)
   field: Field;
 
-  @Column('text')
+  @Column({ type: 'varchar', nullable: true })
+  @ApiProperty({
+    description: 'WorkField Value',
+    example: [{ messaje: 'asdjadj asdasd a asdadsds', likes: 9 }],
+    type: 'string',
+  })
   value: string;
 }

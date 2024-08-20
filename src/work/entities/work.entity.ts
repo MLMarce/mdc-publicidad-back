@@ -36,7 +36,7 @@ export class Work {
   })
   description: string;
 
-  @ManyToOne(() => Category, (category) => category.jobs)
+  @ManyToOne(() => Category, (category) => category.works)
   category: Category;
 
   @OneToMany(() => WorkField, (workField) => workField.work, { cascade: true })

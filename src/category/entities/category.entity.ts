@@ -26,5 +26,5 @@ export class Category {
   fields: Field[];
 
   @OneToMany(() => Work, (work) => work.category)
-  jobs: Work[];
+  works: Work[];
 }

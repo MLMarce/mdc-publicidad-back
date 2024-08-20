@@ -21,6 +21,23 @@ export class CategoryRepository {
     private readonly fieldRepositoryDB: Repository<Field>,
   ) {}
 
+  async getAll() {
+    return await this.categoryRepository.find({
+      relations: { fields: true, works: true },
+    });
+  }
+
+  async getCategoryById(id: string) {
+    const category = await this.categoryRepository.findOne({
+      where: { id },
+      relations: { fields: true, works: true },
+    });
+    if (!category) {
+      throw new NotFoundException(`Category with id ${id} not found.`);
+    }
+    return category;
+  }
+
   async addCategory(category: CreateCategoryDto): Promise<Category> {
     const foundCategory = await this.categoryRepository.findOne({
       where: { name: category.name },

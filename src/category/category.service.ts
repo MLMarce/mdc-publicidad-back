@@ -10,12 +10,12 @@ export class CategoryService {
     return await this.categoryRepository.addCategory(createCategoryDto);
   }
 
-  findAll() {
-    return `This action returns all category`;
+  async findAll() {
+    return await this.categoryRepository.getAll();
   }
 
-  findOne(id: string) {
-    return `This action returns a #${id} category`;
+  async findOne(id: string) {
+    return await this.categoryRepository.getCategoryById(id);
   }
 
   async update(id: string, updateCategoryDto: UpdateCategoryDto) {
